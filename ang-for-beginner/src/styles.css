@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~font-awesome/css/font-awesome.min.css';
+
 
 body{font-family: 'Comfortaa', cursive;}
 
