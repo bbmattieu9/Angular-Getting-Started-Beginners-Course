@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+body{font-family: 'Comfortaa', cursive;}
+
+div.card-header {
+    font-size: large;
+   }
+   
+   div.card {
+     margin-top: 10px
+   }
+   
+   .table {
+     margin-top: 10px
+   }
