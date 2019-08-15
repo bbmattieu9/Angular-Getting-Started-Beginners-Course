@@ -13,6 +13,7 @@ export class ProductListComponent implements OnInit {
     imageMargin = 2;
     showImage = false;
 
+    // tslint:disable-next-line: variable-name
     _listFilter: string;
 
     get listFilter(): string {
@@ -75,6 +76,10 @@ export class ProductListComponent implements OnInit {
 
       toggleImage(): void {
         this.showImage = !this.showImage;
+      }
+
+      onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List: ' + message;
       }
 
       performFilter(filterBy: string): IProduct[] {
