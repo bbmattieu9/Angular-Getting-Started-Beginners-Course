@@ -1,17 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {IProduct } from './product';
 @Component({
     selector: 'app-products',
-    templateUrl: './product-list.component.html'
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.css']
 })
 
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
 
     pageTitle = 'Product List';
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
 
-    products: any[] = [
+    _listFilter: string;
+
+    get listFilter(): string {
+      return this._listFilter;
+    }
+
+    set listFilter(value: string) {
+      this._listFilter = value;
+      this.filteredProducts = this._listFilter ? this.performFilter(this.listFilter) : this.products;
+    }
+
+    filteredProducts: IProduct[];
+    products: IProduct[] = [
         {
           productId: 1,
           productName: 'Leaf Rake',
@@ -50,11 +64,26 @@ export class ProductListComponent {
           description: '15-inch steel blade hand saw',
           price: 11.55,
           starRating: 3.7,
-          imageUrl: 'https://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png'
+          imageUrl : 'https://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png'
         }
       ];
+
+      constructor() {
+        this.filteredProducts = this.products;
+        this.listFilter = '';
+      }
 
       toggleImage(): void {
         this.showImage = !this.showImage;
       }
- }
+
+      performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLowerCase();
+        return this.products.filter((product: IProduct) =>
+        product.productName.toLowerCase().indexOf(filterBy) !== -1);
+      }
+
+      ngOnInit(): void {
+        console.log('Init LifeCycle Called');
+      }
+}
