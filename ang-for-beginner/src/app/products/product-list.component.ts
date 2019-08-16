@@ -13,6 +13,7 @@ export class ProductListComponent implements OnInit {
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
+    errorMessage: string;
 
     // tslint:disable-next-line: variable-name
     _listFilter: string;
@@ -47,7 +48,12 @@ export class ProductListComponent implements OnInit {
       }
 
       ngOnInit(): void {
-        this.products = this.productSrv.getProducts();
-        this.filteredProducts = this.products;
+        this.productSrv.getProducts().subscribe(
+          products => {
+            this.products = products;
+            this.filteredProducts = this.products;
+          },
+          error => this.errorMessage = error as any
+        );
       }
 }
